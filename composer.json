@@ -1,0 +1,16 @@
+{
+    "name": "bukka/eet-app",
+    "license": "MIT",
+    "type": "project",
+    "description": "The EET application",
+    "autoload": {
+        "psr-4": { "Bukka\\": "src/Bukka/" }
+    },
+    "require": {
+        "symfony/console": "^3.2",
+        "ondrejnov/eet": "^0.2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.1"
+    }
+}

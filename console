@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# set base directory
+if readlink ${BASH_SOURCE[0]} > /dev/null; then
+  app_base="$( dirname "$( readlink ${BASH_SOURCE[0]} )" )"
+else
+  app_base="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+fi
+php $app_base/application.php $@
