@@ -7,8 +7,14 @@ class ReceiptDto
     /** @var string */
     private $uuid;
 
+    /** @var \DateTime */
+    private $datOdesl;
+
     /** @var boolean */
     private $prvniZaslani = true;
+
+    /** @var boolean */
+    private $overeni;
 
     /** @var string */
     private $dicPopl;
@@ -74,6 +80,24 @@ class ReceiptDto
     }
 
     /**
+     * @return mixed
+     */
+    public function getDatOdesl()
+    {
+        return $this->datOdesl;
+    }
+
+    /**
+     * @param mixed $datOdesl
+     * @return ReceiptDto
+     */
+    public function setDatOdesl($datOdesl)
+    {
+        $this->datOdesl = $datOdesl;
+        return $this;
+    }
+
+    /**
      * @return boolean
      */
     public function isPrvniZaslani()
@@ -88,6 +112,24 @@ class ReceiptDto
     public function setPrvniZaslani($prvniZaslani)
     {
         $this->prvniZaslani = $prvniZaslani;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isOvereni()
+    {
+        return $this->overeni;
+    }
+
+    /**
+     * @param boolean $overeni
+     * @return ReceiptDto
+     */
+    public function setOvereni($overeni)
+    {
+        $this->overeni = $overeni;
         return $this;
     }
 
