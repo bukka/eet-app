@@ -1,9 +1,8 @@
 <?php
 
-namespace Bukka\EET\App\Storage;
+namespace Bukka\EET\App\Transformer;
 
 use Bukka\EET\App\Dto\ReceiptDto;
-use Bukka\EET\App\Transformer\SimpleArrayReceiptTransformer;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class SimpleArrayReceiptTransformerTest extends TestCase
