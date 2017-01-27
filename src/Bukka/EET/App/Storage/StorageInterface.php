@@ -7,8 +7,19 @@ use Bukka\EET\App\Dto\ResponseDto;
 interface StorageInterface
 {
     /**
-     * @param ResponseDto[] $responses
      * @return void
      */
-    public function store(array $responses);
+    public function close();
+
+    /**
+     * @param string $name
+     * @return void
+     */
+    public function open($name);
+
+    /**
+     * @param ResponseDto $response
+     * @return void
+     */
+    public function store(ResponseDto $response);
 }

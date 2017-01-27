@@ -6,13 +6,13 @@ use Bukka\EET\App\CSV\CSVReader;
 use Bukka\EET\App\Driver\DriverInterface;
 use Bukka\EET\App\Dto\ResponseDto;
 use Bukka\EET\App\Storage\StorageInterface;
-use Bukka\EET\App\Transformer\ReceiptTransformerInterface;
+use Bukka\EET\App\Transformer\ArrayToReceiptDtoTransformer;
 use Bukka\EET\App\Validator\ReceiptValidatorInterface;
 
 class CSVExportTask
 {
     /**
-     * @var ReceiptTransformerInterface
+     * @var ArrayToReceiptDtoTransformer
      */
     private $receiptTransformer;
 
@@ -34,13 +34,13 @@ class CSVExportTask
     /**
      * CSVExportTask constructor
      *
-     * @param ReceiptTransformerInterface $receiptTransformer
+     * @param ArrayToReceiptDtoTransformer $receiptTransformer
      * @param ReceiptValidatorInterface $receiptValidator
      * @param DriverInterface $driver
      * @param StorageInterface $storage
      */
     public function __construct(
-        ReceiptTransformerInterface $receiptTransformer,
+        ArrayToReceiptDtoTransformer $receiptTransformer,
         ReceiptValidatorInterface $receiptValidator,
         DriverInterface $driver,
         StorageInterface $storage
@@ -59,8 +59,10 @@ class CSVExportTask
     {
         $dto = $this->receiptTransformer->transform($row);
         $this->receiptValidator->validate($dto);
+        $response = $this->driver->send($dto);
+        $this->storage->store($response);
 
-        return $this->driver->send($dto);
+        return $response;
     }
 
     /**
@@ -69,11 +71,12 @@ class CSVExportTask
      */
     public function export(CSVReader $csvReader)
     {
+        $this->storage->open($csvReader->getName());
+
         $responses = [];
         foreach ($csvReader->fetch() as $row) {
             $responses[] = $this->exportRow($row);
         }
-        $this->storage->store($responses);
 
         return $responses;
     }

@@ -9,18 +9,25 @@ class CSVWriter
     /**
      * CSVWriter constructor
      *
-     * @param string $csvFilePath
+     * @param string $csvBaseDirectory
      */
-    public function __construct($csvFilePath)
+    public function __construct($csvBaseDirectory)
+    {
+
+    }
+    /**
+     * @param string $name
+     */
+    public function create($name)
     {
 
     }
 
+
     /**
-     * @param ResponseDto[] $responses
-     * @return \Iterator
+     * @param array $row
      */
-    public function save(array $responses)
+    public function insert($row)
     {
 
     }

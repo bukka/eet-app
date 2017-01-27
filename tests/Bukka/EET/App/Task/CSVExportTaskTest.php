@@ -7,7 +7,7 @@ use Bukka\EET\App\Driver\DriverInterface;
 use Bukka\EET\App\Dto\ReceiptDto;
 use Bukka\EET\App\Dto\ResponseDto;
 use Bukka\EET\App\Storage\StorageInterface;
-use Bukka\EET\App\Transformer\ReceiptTransformerInterface;
+use Bukka\EET\App\Transformer\ArrayToReceiptDtoTransformer;
 use Bukka\EET\App\Validator\ReceiptValidatorInterface;
 use PHPUnit_Framework_TestCase as TestCase;
 
@@ -46,7 +46,7 @@ class CSVExportTaskTest extends TestCase
 
     public function setUp()
     {
-        $this->receiptTransformer = $this->createMock(ReceiptTransformerInterface::class);
+        $this->receiptTransformer = $this->createMock(ArrayToReceiptDtoTransformer::class);
         $this->receiptValidator = $this->createMock(ReceiptValidatorInterface::class);
         $this->driver = $this->createMock(DriverInterface::class);
         $this->storage = $this->createMock(StorageInterface::class);
@@ -100,6 +100,10 @@ class CSVExportTaskTest extends TestCase
             ->method('fetch')
             ->willReturn($iterator);
 
+        $this->csvReader
+            ->method('getName')
+            ->willReturn('name');
+
         $dtos = [
             $this->createMock(ReceiptDto::class),
             $this->createMock(ReceiptDto::class),
@@ -129,8 +133,13 @@ class CSVExportTaskTest extends TestCase
 
         $this->storage
             ->expects($this->once())
+            ->method('open')
+            ->with('name');
+
+        $this->storage
+            ->expects($this->exactly(2))
             ->method('store')
-            ->with($responses);
+            ->withConsecutive([$responses[0]], [$responses[1]]);
 
         $this->assertSame($responses, $this->task->export($this->csvReader));
     }

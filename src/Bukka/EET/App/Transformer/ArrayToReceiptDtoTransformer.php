@@ -4,7 +4,7 @@ namespace Bukka\EET\App\Transformer;
 
 use Bukka\EET\App\Dto\ReceiptDto;
 
-class SimpleArrayReceiptTransformer
+class ArrayToReceiptDtoTransformer
 {
     private $columns = [
         'uuid_zpravy' => ['type' => 'int', 'property' => 'uuid'],

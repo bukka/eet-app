@@ -5,7 +5,7 @@ namespace Bukka\EET\App\Transformer;
 use Bukka\EET\App\Dto\ReceiptDto;
 use PHPUnit_Framework_TestCase as TestCase;
 
-class SimpleArrayReceiptTransformerTest extends TestCase
+class ArrayToReceiptDtoTransformerTest extends TestCase
 {
     public function testTransformBasic()
     {
@@ -25,7 +25,7 @@ class SimpleArrayReceiptTransformerTest extends TestCase
             'rezim' => 0,
         ];
 
-        $transformer = new SimpleArrayReceiptTransformer();
+        $transformer = new ArrayToReceiptDtoTransformer();
         $dto = $transformer->transform($data);
 
         $this->assertInstanceOf(ReceiptDto::class, $dto);
