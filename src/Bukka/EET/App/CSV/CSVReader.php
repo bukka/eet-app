@@ -2,8 +2,25 @@
 
 namespace Bukka\EET\App\CSV;
 
+use League\Csv\Reader;
+
 class CSVReader
 {
+    /**
+     * @var string
+     */
+    private $baseDirectory;
+
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var Reader
+     */
+    private $reader;
+
     /**
      * CSVReader constructor
      *
@@ -11,7 +28,7 @@ class CSVReader
      */
     public function __construct($csvBaseDirectory)
     {
-
+        $this->baseDirectory = $csvBaseDirectory;
     }
 
     /**
@@ -19,7 +36,7 @@ class CSVReader
      */
     public function getName()
     {
-
+        return $this->name;
     }
 
     /**
@@ -27,7 +44,8 @@ class CSVReader
      */
     public function create($name)
     {
-
+        $this->name = $name;
+        $this->reader = Reader::createFromPath($this->baseDirectory . $name);
     }
 
     /**

@@ -2,8 +2,25 @@
 
 namespace Bukka\EET\App\CSV;
 
+use League\Csv\Writer;
+
 class CSVWriter
 {
+    /**
+     * @var string
+     */
+    private $baseDirectory;
+
+    /**
+     * @var string|null
+     */
+    private $path;
+
+    /**
+     * @var Writer
+     */
+    private $writer;
+
     /**
      * CSVWriter constructor
      *
@@ -11,7 +28,7 @@ class CSVWriter
      */
     public function __construct($csvBaseDirectory)
     {
-
+        $this->baseDirectory = $csvBaseDirectory;
     }
 
     /**
@@ -19,7 +36,7 @@ class CSVWriter
      */
     public function getPath()
     {
-
+        return $this->path;
     }
 
     /**
@@ -28,7 +45,8 @@ class CSVWriter
      */
     public function create($name)
     {
-
+        $this->path = $this->baseDirectory . $name;
+        $this->writer = Writer::createFromPath($this->path);
     }
 
     /**
@@ -36,7 +54,7 @@ class CSVWriter
      */
     public function close()
     {
-
+        $this->path = $this->writer = null;
     }
 
 
