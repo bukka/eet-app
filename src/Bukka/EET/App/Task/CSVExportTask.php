@@ -60,7 +60,7 @@ class CSVExportTask
         $dto = $this->receiptTransformer->transform($row);
         $this->receiptValidator->validate($dto);
         $response = $this->driver->send($dto);
-        $this->storage->store($response);
+        $this->storage->add($response);
 
         return $response;
     }
@@ -72,12 +72,10 @@ class CSVExportTask
     public function export(CSVReader $csvReader)
     {
         $this->storage->open($csvReader->getName());
-
-        $responses = [];
         foreach ($csvReader->fetch() as $row) {
-            $responses[] = $this->exportRow($row);
+            $this->exportRow($row);
         }
 
-        return $responses;
+        return $this->storage->save();
     }
 }

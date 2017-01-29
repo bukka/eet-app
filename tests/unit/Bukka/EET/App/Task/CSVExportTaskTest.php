@@ -7,6 +7,7 @@ use Bukka\EET\App\Driver\DriverInterface;
 use Bukka\EET\App\Dto\ReceiptDto;
 use Bukka\EET\App\Dto\ResponseDto;
 use Bukka\EET\App\Storage\StorageInterface;
+use Bukka\EET\App\Storage\StorageResult;
 use Bukka\EET\App\Transformer\ArrayToReceiptDtoTransformer;
 use Bukka\EET\App\Validator\ReceiptValidatorInterface;
 use PHPUnit_Framework_TestCase as TestCase;
@@ -131,6 +132,8 @@ class CSVExportTaskTest extends TestCase
             ->withConsecutive([$dtos[0]], [$dtos[1]])
             ->willReturnOnConsecutiveCalls(...$responses);
 
+        $storageResult = $this->createMock(StorageResult::class);
+
         $this->storage
             ->expects($this->once())
             ->method('open')
@@ -138,9 +141,14 @@ class CSVExportTaskTest extends TestCase
 
         $this->storage
             ->expects($this->exactly(2))
-            ->method('store')
+            ->method('add')
             ->withConsecutive([$responses[0]], [$responses[1]]);
 
-        $this->assertSame($responses, $this->task->export($this->csvReader));
+        $this->storage
+            ->expects($this->once())
+            ->method('save')
+            ->willReturn($storageResult);
+
+        $this->assertSame($storageResult, $this->task->export($this->csvReader));
     }
 }

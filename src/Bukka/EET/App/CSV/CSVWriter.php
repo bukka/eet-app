@@ -2,8 +2,6 @@
 
 namespace Bukka\EET\App\CSV;
 
-use Bukka\EET\App\Dto\ResponseDto;
-
 class CSVWriter
 {
     /**
@@ -15,10 +13,28 @@ class CSVWriter
     {
 
     }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+
+    }
+
     /**
      * @param string $name
+     * @return void
      */
     public function create($name)
+    {
+
+    }
+
+    /**
+     * @return void
+     */
+    public function close()
     {
 
     }

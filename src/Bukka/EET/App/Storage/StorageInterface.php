@@ -7,9 +7,10 @@ use Bukka\EET\App\Dto\ResponseDto;
 interface StorageInterface
 {
     /**
+     * @param ResponseDto $response
      * @return void
      */
-    public function close();
+    public function add(ResponseDto $response);
 
     /**
      * @param string $name
@@ -18,8 +19,7 @@ interface StorageInterface
     public function open($name);
 
     /**
-     * @param ResponseDto $response
      * @return void
      */
-    public function store(ResponseDto $response);
+    public function save();
 }

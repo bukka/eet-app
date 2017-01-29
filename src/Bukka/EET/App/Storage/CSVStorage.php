@@ -31,11 +31,12 @@ class CSVStorage implements StorageInterface
     }
 
     /**
+     * @param ResponseDto $response
      * @return void
      */
-    public function close()
+    public function add(ResponseDto $response)
     {
-
+        $this->csvWriter->insert($this->transformer->transform($response));
     }
 
     /**
@@ -44,15 +45,22 @@ class CSVStorage implements StorageInterface
      */
     public function open($name)
     {
-
+        $this->csvWriter->create($name);
     }
 
     /**
-     * @param ResponseDto $response
-     * @return void
+     * @return StorageResult
      */
-    public function store(ResponseDto $response)
+    public function save()
     {
+        $this->csvWriter->close();
 
+        return new StorageResult(
+            [
+                'csv' => [
+                    'path' => $this->csvWriter->getPath()
+                ]
+            ]
+        );
     }
 }
