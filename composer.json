@@ -7,7 +7,9 @@
         "psr-4": { "Bukka\\": "src/Bukka/" }
     },
     "autoload-dev": {
-        "psr-4": { "Bukka\\": ["src/Bukka/", "tests/Bukka"] }
+        "psr-4": {
+            "Bukka\\": ["src/Bukka/", "tests/integration/Bukka/", "tests/unit/Bukka/"]
+        }
     },
     "require": {
         "symfony/console": "^3.2",

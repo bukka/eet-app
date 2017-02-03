@@ -22,6 +22,11 @@ class CSVReader
     private $reader;
 
     /**
+     * @var array
+     */
+    private $headerRow;
+
+    /**
      * CSVReader constructor
      *
      * @param string $csvBaseDirectory
@@ -46,6 +51,7 @@ class CSVReader
     {
         $this->name = $name;
         $this->reader = Reader::createFromPath($this->baseDirectory . $name);
+        $this->headerRow = null;
     }
 
     /**
@@ -53,6 +59,6 @@ class CSVReader
      */
     public function fetch()
     {
-
+        return $this->reader->fetchAssoc();
     }
 }

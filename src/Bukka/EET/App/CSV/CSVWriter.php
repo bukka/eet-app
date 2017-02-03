@@ -21,6 +21,8 @@ class CSVWriter
      */
     private $writer;
 
+    private $headerInserted;
+
     /**
      * CSVWriter constructor
      *
@@ -46,7 +48,8 @@ class CSVWriter
     public function create($name)
     {
         $this->path = $this->baseDirectory . $name;
-        $this->writer = Writer::createFromPath($this->path);
+        $this->writer = Writer::createFromPath(new \SplFileObject($this->path, 'a+'), 'w');
+        $this->headerInserted = false;
     }
 
     /**
@@ -63,6 +66,11 @@ class CSVWriter
      */
     public function insert($row)
     {
+        if (!$this->headerInserted) {
+            $this->writer->insertOne(array_keys($row));
+            $this->headerInserted = true;
+        }
 
+        $this->writer->insertOne($row);
     }
 }
