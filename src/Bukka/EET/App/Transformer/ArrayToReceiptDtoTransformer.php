@@ -3,11 +3,21 @@
 namespace Bukka\EET\App\Transformer;
 
 use Bukka\EET\App\Dto\ReceiptDto;
+use Bukka\EET\App\Security\UuidGenerator;
 
 class ArrayToReceiptDtoTransformer
 {
+    /**
+     * @var UuidGenerator
+     */
+    private $uuidGenerator;
+
+    /**
+     * @var array
+     */
     private $columns = [
-        'uuid_zpravy' => ['type' => 'int', 'property' => 'uuid'],
+        'id' => ['type' => 'str', 'property' => 'external_id'],
+        'uuid_zpravy' => ['type' => 'string', 'property' => 'uuid'],
         'dat_odesl' => 'datetime',
         'prvni_zadani' => ['type' => 'bool', 'property' => 'prvni_zaslani'],
         'overeni' => 'bool',
@@ -21,6 +31,16 @@ class ArrayToReceiptDtoTransformer
         'dan1' => 'float',
         'rezim' => 0,
     ];
+
+    /**
+     * ArrayToReceiptDtoTransformer constructor
+     *
+     * @param UuidGenerator $uuidGenerator
+     */
+    public function __construct(UuidGenerator $uuidGenerator)
+    {
+        $this->uuidGenerator = $uuidGenerator;
+    }
 
     /**
      * @param ReceiptDto $dto
@@ -71,6 +91,10 @@ class ArrayToReceiptDtoTransformer
             if (isset($this->columns[$name])) {
                 $this->transformValue($dto, $name, $value);
             }
+        }
+
+        if ($dto->getUuid() === null) {
+            $dto->setUuid($this->uuidGenerator->generate());
         }
 
         return $dto;

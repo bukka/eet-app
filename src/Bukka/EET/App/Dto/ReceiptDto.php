@@ -4,16 +4,22 @@ namespace Bukka\EET\App\Dto;
 
 class ReceiptDto
 {
+    /** @var int */
+    private $id;
+
+    /** @var string */
+    private $externalId;
+
     /** @var string */
     private $uuid;
 
     /** @var \DateTime */
     private $datOdesl;
 
-    /** @var boolean */
+    /** @var bool */
     private $prvniZaslani = true;
 
-    /** @var boolean */
+    /** @var bool */
     private $overeni;
 
     /** @var string */
@@ -62,6 +68,32 @@ class ReceiptDto
     private $rezim = 0;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * @param string $externalId
+     * @return ReceiptDto
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getUuid()
@@ -98,7 +130,7 @@ class ReceiptDto
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPrvniZaslani()
     {
@@ -106,7 +138,7 @@ class ReceiptDto
     }
 
     /**
-     * @param boolean $prvniZaslani
+     * @param bool $prvniZaslani
      * @return ReceiptDto
      */
     public function setPrvniZaslani($prvniZaslani)
@@ -116,7 +148,7 @@ class ReceiptDto
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isOvereni()
     {
@@ -124,7 +156,7 @@ class ReceiptDto
     }
 
     /**
-     * @param boolean $overeni
+     * @param bool $overeni
      * @return ReceiptDto
      */
     public function setOvereni($overeni)
