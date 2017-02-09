@@ -10,6 +10,16 @@ class ResponseDto
     private $fik;
 
     /**
+     * @var string
+     */
+    private $pkp;
+
+    /**
+     * @var string
+     */
+    private $bkp;
+
+    /**
      * @var ReceiptDto
      */
     private $receipt;
@@ -24,10 +34,48 @@ class ResponseDto
 
     /**
      * @param string $fik
+     * @return ResponseDto
      */
     public function setFik($fik)
     {
         $this->fik = $fik;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPkp()
+    {
+        return $this->pkp;
+    }
+
+    /**
+     * @param string $pkp
+     * @return ResponseDto
+     */
+    public function setPkp($pkp)
+    {
+        $this->pkp = $pkp;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBkp()
+    {
+        return $this->bkp;
+    }
+
+    /**
+     * @param string $bkp
+     * @return ResponseDto
+     */
+    public function setBkp($bkp)
+    {
+        $this->bkp = $bkp;
+        return $this;
     }
 
     /**
@@ -40,9 +88,11 @@ class ResponseDto
 
     /**
      * @param ReceiptDto $receipt
+     * @return ResponseDto
      */
     public function setReceipt($receipt)
     {
         $this->receipt = $receipt;
+        return $this;
     }
 }
