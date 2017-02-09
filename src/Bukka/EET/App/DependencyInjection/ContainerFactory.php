@@ -25,6 +25,7 @@ class ContainerFactory
         'transformer-array-to-receipt-dto'  => 'Bukka\EET\App\Transformer\ArrayToReceiptDtoTransformer',
         'transformer-response-dto-to-array' => 'Bukka\EET\App\Transformer\ResponseDtoToArrayTransformer',
         'validator-required-receipt-fields' => 'Bukka\EET\App\Validator\RequiredReceiptFieldsValidator',
+        'uuid-generator'                    => 'Bukka\EET\App\Security\UuidGenerator',
     ];
 
     /**
@@ -41,6 +42,7 @@ class ContainerFactory
 
         $container
             ->register('csv-export-command', $mapping['csv-export-command'])
+            ->addMethodCall('setCSVReader', [new Reference('csv-reader')])
             ->addMethodCall('setTask', [new Reference('csv-export-task')]);
 
         $container
@@ -67,7 +69,8 @@ class ContainerFactory
             ->register('driver-ondrejnov', $mapping['driver-ondrejnov']);
 
         $container
-            ->register('transformer-array-to-receipt-dto', $mapping['transformer-array-to-receipt-dto']);
+            ->register('transformer-array-to-receipt-dto', $mapping['transformer-array-to-receipt-dto'])
+            ->addArgument(new Reference('uuid-generator'));
 
         $container
             ->register('transformer-response-dto-to-array', $mapping['transformer-response-dto-to-array']);
@@ -75,6 +78,8 @@ class ContainerFactory
         $container
             ->register('validator-required-receipt-fields', $mapping['validator-required-receipt-fields']);
 
+        $container
+            ->register('uuid-generator', $mapping['uuid-generator']);
 
         return $container;
     }
