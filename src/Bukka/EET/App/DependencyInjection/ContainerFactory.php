@@ -21,7 +21,7 @@ class ContainerFactory
         'csv-reader'                        => 'Bukka\EET\App\CSV\CSVReader',
         'csv-writer'                        => 'Bukka\EET\App\CSV\CSVWriter',
         'csv-storage'                       => 'Bukka\EET\App\Storage\CSVStorage',
-        'driver-ondrejnov'                  => 'Bukka\EET\App\Driver\Ondrejnov\Driver',
+        'driver'                            => 'Bukka\EET\App\Driver\Ondrejnov\Driver',
         'transformer-array-to-receipt-dto'  => 'Bukka\EET\App\Transformer\ArrayToReceiptDtoTransformer',
         'transformer-response-dto-to-array' => 'Bukka\EET\App\Transformer\ResponseDtoToArrayTransformer',
         'validator-required-receipt-fields' => 'Bukka\EET\App\Validator\RequiredReceiptFieldsValidator',
@@ -49,7 +49,7 @@ class ContainerFactory
             ->register('csv-export-task', $mapping['csv-export-task'])
             ->addArgument(new Reference('transformer-array-to-receipt-dto'))
             ->addArgument(new Reference('validator-required-receipt-fields'))
-            ->addArgument(new Reference('driver-ondrejnov'))
+            ->addArgument(new Reference('driver'))
             ->addArgument(new Reference('csv-storage'));
 
         $container
@@ -66,7 +66,7 @@ class ContainerFactory
             ->addArgument(new Reference('transformer-response-dto-to-array'));
 
         $container
-            ->register('driver-ondrejnov', $mapping['driver-ondrejnov']);
+            ->register('driver', $mapping['driver']);
 
         $container
             ->register('transformer-array-to-receipt-dto', $mapping['transformer-array-to-receipt-dto'])

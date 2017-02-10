@@ -59,5 +59,6 @@ class CSVExportCommand extends Command
         $path = $input->getArgument('path');
         $this->csvReader->create($path);
         $this->task->export($this->csvReader);
+        $output->writeln('OK');
     }
 }
