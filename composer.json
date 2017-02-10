@@ -8,7 +8,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Bukka\\": ["src/Bukka/", "tests/integration/Bukka/", "tests/unit/Bukka/"]
+            "Bukka\\": ["src/Bukka/", "tests/Bukka/"]
         }
     },
     "require": {
