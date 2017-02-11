@@ -12,8 +12,10 @@
         }
     },
     "require": {
+        "symfony/config": "^3.2",
         "symfony/console": "^3.2",
         "symfony/dependency-injection": "^3.2",
+        "symfony/var-dumper": "^3.2",
         "league/csv": "^8.0",
         "ondrejnov/eet": "^0.2.0",
         "ramsey/uuid": "^3.5"
