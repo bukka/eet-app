@@ -29,6 +29,8 @@ class ArrayToReceiptDtoTransformer
         'celk_trzba' => 'float',
         'zakl_dan1' => 'float',
         'dan1' => 'float',
+        'zakl_dan2' => 'float',
+        'dan2' => 'float',
         'rezim' => 0,
     ];
 

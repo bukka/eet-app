@@ -15,7 +15,7 @@ class ResponseDtoToArrayTransformer
         $receipt = $response->getReceipt();
 
         return [
-            'uuid_zpravy' => $receipt->getUuid(),
+            'id' => $receipt->getExternalId(),
             'dat_odesl' => $receipt->getDatOdesl()->format('j.n.Y G:i:s'),
             'prvni_zadani' => $receipt->isPrvniZaslani() ? 'ano' : 'ne',
             'overeni' => $receipt->isOvereni() ? 'ano' : 'ne',
@@ -30,6 +30,7 @@ class ResponseDtoToArrayTransformer
             'dan1' => $receipt->getDan1(),
             'zakl_dan2' => $receipt->getZaklDan2(),
             'dan2' => $receipt->getDan2(),
+            'uuid_zpravy' => $receipt->getUuid(),
             'fik' => 'b3309b52-7c87-4014-a496-4c7a53cf9125',
             'pkp' => $response->getPkp(),
             'bkp' => $response->getBkp(),

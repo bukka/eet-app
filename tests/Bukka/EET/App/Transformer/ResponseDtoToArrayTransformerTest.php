@@ -21,6 +21,7 @@ class ResponseDtoToArrayTransformerTest extends TestCase
     public function testTransformBasic()
     {
         $receiptDto = (new ReceiptDto())
+            ->setExternalId(1)
             ->setUuid('b3309a52-7c87-4014-a496-4c7a53cf9125')
             ->setDatOdesl(new \DateTime('2017-01-10 9:10:01'))
             ->setPrvniZaslani(true)
@@ -52,7 +53,7 @@ class ResponseDtoToArrayTransformerTest extends TestCase
 
         $this->assertSame(
             [
-                'uuid_zpravy' => 'b3309a52-7c87-4014-a496-4c7a53cf9125',
+                'id' => 1,
                 'dat_odesl' => "10.1.2017 9:10:01",
                 'prvni_zadani' => "ano",
                 'overeni' => "ne",
@@ -67,6 +68,7 @@ class ResponseDtoToArrayTransformerTest extends TestCase
                 'dan1' => 17,
                 'zakl_dan2' => 80,
                 'dan2' => 20,
+                'uuid_zpravy' => 'b3309a52-7c87-4014-a496-4c7a53cf9125',
                 'fik' => 'b3309b52-7c87-4014-a496-4c7a53cf9125',
                 'pkp' => '03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3',
                 'bkp' => $bkp,
