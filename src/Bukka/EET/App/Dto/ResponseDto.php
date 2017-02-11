@@ -20,6 +20,16 @@ class ResponseDto
     private $bkp;
 
     /**
+     * @var int
+     */
+    private $errorCode;
+
+    /**
+     * @var string|null
+     */
+    private $errorMsg;
+
+    /**
      * @var ReceiptDto
      */
     private $receipt;
@@ -75,6 +85,42 @@ class ResponseDto
     public function setBkp($bkp)
     {
         $this->bkp = $bkp;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getErrorCode()
+    {
+        return $this->errorCode;
+    }
+
+    /**
+     * @param int $errorCode
+     * @return ResponseDto
+     */
+    public function setErrorCode($errorCode)
+    {
+        $this->errorCode = $errorCode;
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getErrorMsg()
+    {
+        return $this->errorMsg;
+    }
+
+    /**
+     * @param null|string $errorMsg
+     * @return ResponseDto
+     */
+    public function setErrorMsg($errorMsg)
+    {
+        $this->errorMsg = $errorMsg;
         return $this;
     }
 

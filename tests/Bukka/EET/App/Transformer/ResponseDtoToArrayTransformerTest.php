@@ -72,7 +72,7 @@ class ResponseDtoToArrayTransformerTest extends TestCase
                 'fik' => 'b3309b52-7c87-4014-a496-4c7a53cf9125',
                 'pkp' => '03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3',
                 'bkp' => $bkp,
-                'error' => '',
+                'chyba' => '',
             ],
             $this->transformer->transform($responseDto)
         );

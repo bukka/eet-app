@@ -31,10 +31,10 @@ class ResponseDtoToArrayTransformer
             'zakl_dan2' => $receipt->getZaklDan2(),
             'dan2' => $receipt->getDan2(),
             'uuid_zpravy' => $receipt->getUuid(),
-            'fik' => 'b3309b52-7c87-4014-a496-4c7a53cf9125',
+            'fik' => $response->getFik(),
             'pkp' => $response->getPkp(),
             'bkp' => $response->getBkp(),
-            'error' => '',
+            'chyba' => $response->getErrorCode() ? $response->getErrorMsg() : '',
         ];
     }
 }

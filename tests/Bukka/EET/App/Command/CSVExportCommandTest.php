@@ -171,7 +171,7 @@ class CSVExportCommandTest extends TestCase
                 ],
                 [
                     'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,porad_cis,dat_trzby,celk_trzba,' .
-                        'rezim,zakl_dan1,dan1,zakl_dan2,dan2,uuid_zpravy,fik,pkp,bkp,error',
+                        'rezim,zakl_dan1,dan1,zakl_dan2,dan2,uuid_zpravy,fik,pkp,bkp,chyba',
                     '1,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,' .
                         '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
                         'b3309b52-7c87-4014-a496-4c7a53cf9125,03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' .
