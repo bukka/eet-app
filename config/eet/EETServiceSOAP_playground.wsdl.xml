@@ -7,7 +7,7 @@
   </wsdl:documentation>
   <wsdl:types>
     <xsd:schema>
-        <xsd:import namespace="http://fs.mfcr.cz/eet/schema/v3" schemaLocation="../../../../../../Documents/EET/EETXMLSchema.xsd"/>
+        <xsd:import namespace="http://fs.mfcr.cz/eet/schema/v3" schemaLocation="EETXMLSchema.xsd"/>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="OdeslaniTrzbyRequest">

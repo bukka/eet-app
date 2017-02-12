@@ -1,3 +1,4 @@
 vendor/
 csv/
 config/parameters.yml
+config/certs/secret

@@ -45,11 +45,11 @@ class Driver implements DriverInterface
      */
     public function send(ReceiptDto $receiptDto)
     {
-        if (!is_file($this->pkcs12Cert)) {
+        if (!is_file($this->p12Cert)) {
             throw new DriverException('The PKCS12 certificate path is invalid');
         }
 
-        if (!openssl_pkcs12_read(file_get_contents($this->pkcs12Cert), $cert, $password)) {
+        if (!openssl_pkcs12_read(file_get_contents($this->p12Cert), $cert, $this->password)) {
             throw new DriverException('Invalid PKCS12 certificate');
         }
 

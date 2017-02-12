@@ -6,7 +6,6 @@ use Bukka\EET\App\Dto\ReceiptDto;
 use Bukka\EET\App\Dto\ResponseDto;
 use Ondrejnov\EET\Exceptions\ClientException;
 use Ondrejnov\EET\Exceptions\RequirementsException;
-use Ondrejnov\EET\SoapClient;
 use Ondrejnov\EET\Utils\Format;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 
@@ -107,7 +106,7 @@ class Dispatcher {
      */
     public function getCheckCodes(ReceiptDto $receipt) {
         $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA256, ['type' => 'private']);
-        $objKey->loadKey($this->key, true);
+        $objKey->loadKey($this->key);
 
         $arr = [
             $receipt->getDicPopl(),
@@ -146,8 +145,8 @@ class Dispatcher {
 
         $responseDto = (new ResponseDto())
             ->setReceipt($receiptDto)
-            ->setPkp($data['pkp']['_'])
-            ->setBkp($data['bkp']['_']);
+            ->setPkp(base64_encode($data['KontrolniKody']['pkp']['_']))
+            ->setBkp($data['KontrolniKody']['bkp']['_']);
 
         $response = $this->getSoapClient()->OdeslaniTrzby($data);
 
@@ -202,8 +201,11 @@ class Dispatcher {
             'uuid_zpravy' => $receipt->getUuid(),
             'dat_odesl' => $receipt->getDatOdesl()->format('c'),
             'prvni_zaslani' => $receipt->isPrvniZaslani() ? 'true' : 'false',
-            'overeni' => $receipt->isOvereni() ? 'true' : 'false',
         ];
+
+        if ($receipt->isOvereni()) {
+            $head['overeni'] = 'true';
+        }
 
         $body = [
             'dic_popl' => $receipt->getDicPopl(),
