@@ -66,7 +66,10 @@ class ContainerFactory
             ->addArgument(new Reference('transformer-response-dto-to-array'));
 
         $container
-            ->register('driver', $mapping['driver']);
+            ->register('driver', $mapping['driver'])
+            ->addArgument('%eet.service.wsdl%')
+            ->addArgument('%eet.p12.cert%')
+            ->addArgument('%eet.p12.password%');
 
         $container
             ->register('transformer-array-to-receipt-dto', $mapping['transformer-array-to-receipt-dto'])

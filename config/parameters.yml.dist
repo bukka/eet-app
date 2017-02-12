@@ -1,0 +1,6 @@
+parameters:
+    csv.reader.base.directory: %app.root_dir%/csv/in
+    csv.writer.base.directory: %app.root_dir%/csv/out
+    eet.service.wsdl: %app.root_dir%/config/eet/EETServiceSOAP_playground.wsdl.xml
+    eet.p12.cert: %app.root_dir%/config/certs/EET_CA1_Playground-CZ00000019.p12
+    eet.p12.password: eet
