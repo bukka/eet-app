@@ -115,6 +115,9 @@ class CSVExportCommandTest extends TestCase
         $container = ContainerFactory::create(['driver' => MockDriver::class]);
         $container->setParameter('csv.reader.base.directory', $this->inputBaseDir);
         $container->setParameter('csv.writer.base.directory', $this->outputBaseDir);
+        $container->setParameter('eet.service.wsdl', 'not_used.xml');
+        $container->setParameter('eet.p12.cert', 'not_used.p12');
+        $container->setParameter('eet.p12.password', 'eet');
 
         $csvExportCommand = $container->get('csv-export-command');
 
