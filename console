@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set base directory
 if readlink ${BASH_SOURCE[0]} > /dev/null; then
