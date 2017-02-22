@@ -19,7 +19,7 @@ interface StorageInterface
     public function open($name);
 
     /**
-     * @return void
+     * @return StorageResult
      */
     public function save();
 }

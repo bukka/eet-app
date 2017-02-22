@@ -34,7 +34,7 @@ class ResponseDtoToArrayTransformer
             'fik' => $response->getFik(),
             'pkp' => $response->getPkp(),
             'bkp' => $response->getBkp(),
-            'chyba' => $response->getErrorCode() ? $response->getErrorMsg() : '',
+            'chyba' => $response->getErrorMsg() ?: '',
         ];
     }
 }

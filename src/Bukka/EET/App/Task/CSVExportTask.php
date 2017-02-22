@@ -7,6 +7,7 @@ use Bukka\EET\App\Driver\DriverInterface;
 use Bukka\EET\App\Dto\ResponseDto;
 use Bukka\EET\App\Storage\StorageInterface;
 use Bukka\EET\App\Transformer\ArrayToReceiptDtoTransformer;
+use Bukka\EET\App\Validator\Exception\ValidatorException;
 use Bukka\EET\App\Validator\ReceiptValidatorInterface;
 
 class CSVExportTask
@@ -30,6 +31,11 @@ class CSVExportTask
      * @var StorageInterface
      */
     private $storage;
+
+    /**
+     * @var array
+     */
+    private $errors;
 
     /**
      * CSVExportTask constructor
@@ -57,9 +63,17 @@ class CSVExportTask
      */
     private function exportRow(array $row)
     {
-        $dto = $this->receiptTransformer->transform($row);
-        $this->receiptValidator->validate($dto);
-        $response = $this->driver->send($dto);
+        $receipt = $this->receiptTransformer->transform($row);
+        try {
+            $this->receiptValidator->validate($receipt);
+            $response = $this->driver->send($receipt);
+        } catch (\Exception $exception) {
+            $response = (new ResponseDto())
+                ->setReceipt($receipt)
+                ->setErrorCode($exception->getCode())
+                ->setErrorMsg($exception->getMessage());
+        }
+
         $this->storage->add($response);
 
         return $response;
@@ -67,15 +81,17 @@ class CSVExportTask
 
     /**
      * @param CSVReader $csvReader
-     * @return ResponseDto[]
+     * @return StorageResult
      */
     public function export(CSVReader $csvReader)
     {
         $this->storage->open($csvReader->getName());
+        $this->errors = [];
         foreach ($csvReader->fetch() as $row) {
             $this->exportRow($row);
         }
 
         return $this->storage->save();
+
     }
 }
