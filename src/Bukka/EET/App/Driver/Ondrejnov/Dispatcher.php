@@ -148,7 +148,13 @@ class Dispatcher {
             ->setPkp(base64_encode($data['KontrolniKody']['pkp']['_']))
             ->setBkp($data['KontrolniKody']['bkp']['_']);
 
-        $response = $this->getSoapClient()->OdeslaniTrzby($data);
+        try {
+            $response = $this->getSoapClient()->OdeslaniTrzby($data);
+        } catch (\Exception $exception) {
+            return $responseDto
+                ->setErrorMsg($exception->getMessage())
+                ->setErrorCode($exception->getCode());
+        }
 
         if (
             (!isset($response->Chyba) || !$this->processError($responseDto, $response->Chyba)) &&

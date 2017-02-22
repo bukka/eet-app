@@ -3,9 +3,11 @@
 namespace Bukka\EET\App\CSV;
 
 use Bukka\EET\App\DependencyInjection\ContainerFactory;
+use Bukka\EET\App\Driver\Exception\DriverException;
 use Bukka\EET\App\Driver\Mock\MockDriver;
 use Bukka\EET\App\Dto\ReceiptDto;
 use Bukka\EET\App\Dto\ResponseDto;
+use phpDocumentor\Reflection\DocBlock\Tags\Param;
 use PHPUnit_Framework_TestCase as TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -100,11 +102,19 @@ class CSVExportCommandTest extends TestCase
     private function mockSender($fiks = [], $pkp = '', $bkp = '')
     {
         MockDriver::$mockSender = function (ReceiptDto $receiptDto) use ($fiks, $pkp, $bkp) {
-            return (new ResponseDto())
-                ->setFik($fiks[$receiptDto->getExternalId()])
+            $response = (new ResponseDto())
                 ->setPkp($pkp)
                 ->setBkp($bkp)
                 ->setReceipt($receiptDto);
+
+            $fik = $fiks[$receiptDto->getExternalId()];
+            if ($fik === false) {
+                $response->setErrorMsg("Connection error");
+            } else {
+                $response->setFik($fik);
+            }
+
+            return $response;
         };
     }
 
@@ -139,7 +149,7 @@ class CSVExportCommandTest extends TestCase
      * @param string $expectedRow
      * @param string $outputRow
      */
-    private function checkOutputRow($expectedRow, $outputRow)
+    private function checkOutputRow($expectedRow, $outputRow, $rowIndex)
     {
         $outputColumns = explode(",", $outputRow);
         $expectedColumns = explode(",", $expectedRow);
@@ -149,7 +159,11 @@ class CSVExportCommandTest extends TestCase
             if (substr($expectedColumns[$i], 0, 1) === '[') {
                 $this->assertRegExp('#' . $expectedColumns[$i] . "#", $outputColumns[$i]);
             } else {
-                $this->assertSame($expectedColumns[$i], $outputColumns[$i]);
+                $this->assertSame(
+                    $expectedColumns[$i],
+                    $outputColumns[$i],
+                    "Failed assertion for row $rowIndex and column $i"
+                );
             }
         }
     }
@@ -179,7 +193,7 @@ class CSVExportCommandTest extends TestCase
         $this->assertSame($expectedRows[0], $outputRows[0]);
 
         for ($i = 1; $i < $expectedRowsCount; $i++) {
-            $this->checkOutputRow($expectedRows[$i], $outputRows[$i]);
+            $this->checkOutputRow($expectedRows[$i], $outputRows[$i], $i);
         }
     }
 
@@ -227,6 +241,28 @@ class CSVExportCommandTest extends TestCase
                         $bkp . ','
                 ],
                 [2 => 'b3309b52-7c87-4014-a496-4c7a53cf9125'], // fiks
+                '03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3', // pkp
+                $bkp
+            ],
+            [ // 2 records with faling connection for second
+                [
+                    'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,' .
+                        'porad_cis,dat_trzby,celk_trzba,rezim,zakl_dan1,dan1,zakl_dan2,dan2',
+                    '1,"10.1.2017 9:11:01",ano,"ano",CZ24222224,103,3,5862,"9.1.2017",100,0,83,17,80,60.5', // missing dic_popl
+                    '2,"10.1.2017 9:10:01",ano,"ano",CZ24222224,101,3,5862,"9.1.2017",100,0,83,17,80,60.5', // OK
+                ],
+                [
+                    'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,porad_cis,dat_trzby,celk_trzba,' .
+                        'rezim,zakl_dan1,dan1,zakl_dan2,dan2,uuid_zpravy,fik,pkp,bkp,chyba',
+                    '1,"10.1.2017 9:11:01",ano,ano,CZ24222224,103,3,5862,9.1.2017,100,0,83,17,80,60.5,' .
+                        '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
+                        ',03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' . $bkp . ',"Connection error"',
+                    '2,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,' .
+                        '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
+                        'b3309b52-7c87-4014-a496-4c7a53cf9125,03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' .
+                        $bkp . ','
+                ],
+                [1 => false, 2 => 'b3309b52-7c87-4014-a496-4c7a53cf9125'], // fiks
                 '03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3', // pkp
                 $bkp
             ]
