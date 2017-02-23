@@ -77,7 +77,7 @@ class ArrayToReceiptDtoTransformer
                 }
                 /* fallthrough */
             case 'datetime':
-                $dto->$method(\DateTime::createFromFormat('j.n.Y G:i:s', $value));
+                $dto->$method(\DateTime::createFromFormat('j.n.Y G:i:s', $value) ?: null);
                 break;
             default:
                 $dto->$method($value);

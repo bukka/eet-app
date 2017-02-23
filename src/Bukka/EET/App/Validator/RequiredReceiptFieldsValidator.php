@@ -43,7 +43,7 @@ class RequiredReceiptFieldsValidator implements ReceiptValidatorInterface
         }
 
         if ($missing) {
-            throw new ValidatorException('Missing field: ' . $missing);
+            throw new ValidatorException('Missing or invalid field: ' . $missing);
         }
     }
 }
