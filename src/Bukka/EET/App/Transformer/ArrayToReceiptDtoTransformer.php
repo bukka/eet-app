@@ -72,10 +72,12 @@ class ArrayToReceiptDtoTransformer
                 $dto->$method(in_array($value, ['yes', 'on', 'ano', 'true', 1]));
                 break;
             case 'date':
-                $value .= ' 00:00:00';
+                if (strpos($value, ':') === false) {
+                    $value .= ' 0:00:00';
+                }
                 /* fallthrough */
             case 'datetime':
-                $dto->$method(\DateTime::createFromFormat('j.n.Y H:i:s', $value));
+                $dto->$method(\DateTime::createFromFormat('j.n.Y G:i:s', $value));
                 break;
             default:
                 $dto->$method($value);
