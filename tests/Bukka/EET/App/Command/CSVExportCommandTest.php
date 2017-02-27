@@ -208,13 +208,13 @@ class CSVExportCommandTest extends TestCase
             [ // 1 valid record
                 [
                     'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,' .
-                        'porad_cis,dat_trzby,celk_trzba,rezim,zakl_dan1,dan1,zakl_dan2,dan2',
-                    '1,"10.1.2017 9:10:01",ano,"ano",CZ24222224,101,3,5862,"9.1.2017",100,0,83,17,80,60.5'
+                        'porad_cis,dat_trzby,celk_trzba,rezim,zakl_dan1,dan1,zakl_dan2,dan2,zakl_dan3,dan3',
+                    '1,"10.1.2017 9:10:01",ano,"ano",CZ24222224,101,3,5862,"9.1.2017",100,0,83,17,80,60.5,70,30'
                 ],
                 [
                     'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,porad_cis,dat_trzby,celk_trzba,' .
-                        'rezim,zakl_dan1,dan1,zakl_dan2,dan2,uuid_zpravy,fik,pkp,bkp,chyba',
-                    '1,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,' .
+                        'rezim,zakl_dan1,dan1,zakl_dan2,dan2,zakl_dan3,dan3,uuid_zpravy,fik,pkp,bkp,chyba',
+                    '1,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,70,30,' .
                         '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
                         'b3309b52-7c87-4014-a496-4c7a53cf9125,03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' .
                         $bkp . ','
@@ -226,17 +226,17 @@ class CSVExportCommandTest extends TestCase
             [ // 2 records with first invalid (missing dic_popl)
                 [
                     'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,' .
-                    'porad_cis,dat_trzby,celk_trzba,rezim,zakl_dan1,dan1,zakl_dan2,dan2',
-                    '1,"10.1.2017 9:11:01",ano,"ano",,103,3,5862,"9.1.2017",100,0,83,17,80,60.5', // missing dic_popl
-                    '2,"10.1.2017 9:10:01",ano,"ano",CZ24222224,101,3,5862,"9.1.2017",100,0,83,17,80,60.5', // OK
+                    'porad_cis,dat_trzby,celk_trzba,rezim,zakl_dan1,dan1,zakl_dan2,dan2,zakl_dan3,dan3',
+                    '1,"10.1.2017 9:11:01",ano,"ano",,103,3,5862,"9.1.2017",100,0,83,17,80,60.5,70,30', // missing dic_popl
+                    '2,"10.1.2017 9:10:01",ano,"ano",CZ24222224,101,3,5862,"9.1.2017",100,0,83,17,80,60.5,70,30', // OK
                 ],
                 [
                     'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,porad_cis,dat_trzby,celk_trzba,' .
-                    'rezim,zakl_dan1,dan1,zakl_dan2,dan2,uuid_zpravy,fik,pkp,bkp,chyba',
-                    '1,"10.1.2017 9:11:01",ano,ano,,103,3,5862,9.1.2017,100,0,83,17,80,60.5,' .
+                    'rezim,zakl_dan1,dan1,zakl_dan2,dan2,zakl_dan3,dan3,uuid_zpravy,fik,pkp,bkp,chyba',
+                    '1,"10.1.2017 9:11:01",ano,ano,,103,3,5862,9.1.2017,100,0,83,17,80,60.5,70,30,' .
                         '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},,,,' .
                         '"Missing or invalid field: dic_popl"',
-                    '2,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,' .
+                    '2,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,70,30,' .
                         '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
                         'b3309b52-7c87-4014-a496-4c7a53cf9125,03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' .
                         $bkp . ','
@@ -248,17 +248,17 @@ class CSVExportCommandTest extends TestCase
             [ // 2 records with faling connection for second
                 [
                     'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,' .
-                        'porad_cis,dat_trzby,celk_trzba,rezim,zakl_dan1,dan1,zakl_dan2,dan2',
-                    '1,"10.1.2017 9:11:01",ano,"ano",CZ24222224,103,3,5862,"9.1.2017",100,0,83,17,80,60.5', // missing dic_popl
-                    '2,"10.1.2017 9:10:01",ano,"ano",CZ24222224,101,3,5862,"9.1.2017",100,0,83,17,80,60.5', // OK
+                        'porad_cis,dat_trzby,celk_trzba,rezim,zakl_dan1,dan1,zakl_dan2,dan2,zakl_dan3,dan3',
+                    '1,"10.1.2017 9:11:01",ano,"ano",CZ24222224,103,3,5862,"9.1.2017",100,0,83,17,80,60.5,70,30', // missing dic_popl
+                    '2,"10.1.2017 9:10:01",ano,"ano",CZ24222224,101,3,5862,"9.1.2017",100,0,83,17,80,60.5,70,30', // OK
                 ],
                 [
                     'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,porad_cis,dat_trzby,celk_trzba,' .
-                        'rezim,zakl_dan1,dan1,zakl_dan2,dan2,uuid_zpravy,fik,pkp,bkp,chyba',
-                    '1,"10.1.2017 9:11:01",ano,ano,CZ24222224,103,3,5862,9.1.2017,100,0,83,17,80,60.5,' .
+                        'rezim,zakl_dan1,dan1,zakl_dan2,dan2,zakl_dan3,dan3,uuid_zpravy,fik,pkp,bkp,chyba',
+                    '1,"10.1.2017 9:11:01",ano,ano,CZ24222224,103,3,5862,9.1.2017,100,0,83,17,80,60.5,70,30,' .
                         '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
                         ',03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' . $bkp . ',"Connection error"',
-                    '2,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,' .
+                    '2,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,70,30,' .
                         '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
                         'b3309b52-7c87-4014-a496-4c7a53cf9125,03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' .
                         $bkp . ','
