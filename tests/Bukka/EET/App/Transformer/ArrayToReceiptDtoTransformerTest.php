@@ -135,8 +135,8 @@ class ArrayToReceiptDtoTransformerTest extends TestCase
             'dan1' => 17,
             'zakl_dan2' => '',
             'dan2' => '',
-            'zakl_dan2' => '',
-            'dan2' => '',
+            'zakl_dan3' => '',
+            'dan3' => '',
             'rezim' => 0,
         ];
 
