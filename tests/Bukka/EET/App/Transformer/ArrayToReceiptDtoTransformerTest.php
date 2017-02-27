@@ -41,6 +41,8 @@ class ArrayToReceiptDtoTransformerTest extends TestCase
             'dan1' => 17,
             'zakl_dan2' => 80,
             'dan2' => 20,
+            'zakl_dan3' => 70,
+            'dan3' => 30,
             'rezim' => 0,
         ];
 
@@ -61,6 +63,8 @@ class ArrayToReceiptDtoTransformerTest extends TestCase
         $this->assertSame(17.0, $dto->getDan1());
         $this->assertSame(80.0, $dto->getZaklDan2());
         $this->assertSame(20.0, $dto->getDan2());
+        $this->assertSame(70.0, $dto->getZaklDan3());
+        $this->assertSame(30.0, $dto->getDan3());
         $this->assertSame(0, $dto->getRezim());
     }
 
@@ -81,6 +85,8 @@ class ArrayToReceiptDtoTransformerTest extends TestCase
             'dan1' => 17,
             'zakl_dan2' => '',
             'dan2' => '',
+            'zakl_dan3' => '',
+            'dan3' => '',
             'rezim' => 0,
         ];
 
@@ -107,6 +113,8 @@ class ArrayToReceiptDtoTransformerTest extends TestCase
         $this->assertSame(17.0, $dto->getDan1());
         $this->assertSame(0.0, $dto->getZaklDan2());
         $this->assertSame(0.0, $dto->getDan2());
+        $this->assertSame(0.0, $dto->getZaklDan3());
+        $this->assertSame(0.0, $dto->getDan3());
         $this->assertSame(0, $dto->getRezim());
     }
 
@@ -125,6 +133,8 @@ class ArrayToReceiptDtoTransformerTest extends TestCase
             'celk_trzba' => 100,
             'zakl_dan1' => 83,
             'dan1' => 17,
+            'zakl_dan2' => '',
+            'dan2' => '',
             'zakl_dan2' => '',
             'dan2' => '',
             'rezim' => 0,
@@ -153,6 +163,8 @@ class ArrayToReceiptDtoTransformerTest extends TestCase
         $this->assertSame(17.0, $dto->getDan1());
         $this->assertSame(0.0, $dto->getZaklDan2());
         $this->assertSame(0.0, $dto->getDan2());
+        $this->assertSame(0.0, $dto->getZaklDan3());
+        $this->assertSame(0.0, $dto->getDan3());
         $this->assertSame(0, $dto->getRezim());
     }
 }
