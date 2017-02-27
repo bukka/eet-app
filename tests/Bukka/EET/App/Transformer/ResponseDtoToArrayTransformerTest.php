@@ -36,6 +36,8 @@ class ResponseDtoToArrayTransformerTest extends TestCase
             ->setDan1(17)
             ->setZaklDan2(80)
             ->setDan2(20)
+            ->setZaklDan3(70)
+            ->setDan3(30)
             ->setRezim(0);
 
         $bkp = 'Ca8sTbURReQjjgcy/znXBKjPOnZof3AxWK5WySpyMrUXF0o7cz1BP6adQzktODKh2d8s' .
@@ -68,6 +70,8 @@ class ResponseDtoToArrayTransformerTest extends TestCase
                 'dan1' => 17,
                 'zakl_dan2' => 80,
                 'dan2' => 20,
+                'zakl_dan3' => 70,
+                'dan3' => 30,
                 'uuid_zpravy' => 'b3309a52-7c87-4014-a496-4c7a53cf9125',
                 'fik' => 'b3309b52-7c87-4014-a496-4c7a53cf9125',
                 'pkp' => '03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3',
