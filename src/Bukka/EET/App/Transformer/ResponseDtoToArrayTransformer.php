@@ -13,17 +13,19 @@ class ResponseDtoToArrayTransformer
     public function transform(ResponseDto $response)
     {
         $receipt = $response->getReceipt();
+        $datOdesl = $receipt->getDatOdesl();
+        $datTrzby = $receipt->getDatTrzby();
 
         return [
             'id' => $receipt->getExternalId(),
-            'dat_odesl' => $receipt->getDatOdesl()->format('j.n.Y G:i:s'),
+            'dat_odesl' => $datOdesl ? $datOdesl->format('j.n.Y G:i:s') : '',
             'prvni_zadani' => $receipt->isPrvniZaslani() ? 'ano' : 'ne',
             'overeni' => $receipt->isOvereni() ? 'ano' : 'ne',
             'dic_popl' => $receipt->getDicPopl(),
             'id_provoz' => $receipt->getIdProvoz(),
             'id_pokl' => $receipt->getIdPokl(),
             'porad_cis' => $receipt->getPoradCis(),
-            'dat_trzby' => $receipt->getDatTrzby()->format('j.n.Y'),
+            'dat_trzby' => $datTrzby ? $datTrzby->format('j.n.Y') : '',
             'celk_trzba' => $receipt->getCelkTrzba(),
             'rezim' => $receipt->getRezim(),
             'zakl_dan1' => $receipt->getZaklDan1(),
