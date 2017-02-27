@@ -30,6 +30,8 @@ class ResponseDtoToArrayTransformer
             'dan1' => $receipt->getDan1(),
             'zakl_dan2' => $receipt->getZaklDan2(),
             'dan2' => $receipt->getDan2(),
+            'zakl_dan3' => $receipt->getZaklDan3(),
+            'dan3' => $receipt->getDan3(),
             'uuid_zpravy' => $receipt->getUuid(),
             'fik' => $response->getFik(),
             'pkp' => $response->getPkp(),
