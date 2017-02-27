@@ -31,6 +31,8 @@ class ArrayToReceiptDtoTransformer
         'dan1' => 'float',
         'zakl_dan2' => 'float',
         'dan2' => 'float',
+        'zakl_dan3' => 'float',
+        'dan3' => 'float',
         'rezim' => 0,
     ];
 
