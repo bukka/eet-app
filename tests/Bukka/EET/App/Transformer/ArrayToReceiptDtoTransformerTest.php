@@ -21,7 +21,7 @@ class ArrayToReceiptDtoTransformerTest extends TestCase
     public function setUp()
     {
         $this->uuidGenerator = $this->createMock(UuidGenerator::class);
-        $this->transformer = new ArrayToReceiptDtoTransformer($this->uuidGenerator, false);
+        $this->transformer = new ArrayToReceiptDtoTransformer($this->uuidGenerator, false, false);
     }
 
     public function testTransformBasic()

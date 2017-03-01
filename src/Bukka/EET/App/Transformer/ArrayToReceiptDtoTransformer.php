@@ -13,9 +13,14 @@ class ArrayToReceiptDtoTransformer
     private $uuidGenerator;
 
     /**
-     * @var int
+     * @var bool
      */
     private $rewriteSentDate;
+
+    /**
+     * @var bool
+     */
+    private $rewriteDealDate;
 
     /**
      * @var array
@@ -46,10 +51,14 @@ class ArrayToReceiptDtoTransformer
      *
      * @param UuidGenerator $uuidGenerator
      */
-    public function __construct(UuidGenerator $uuidGenerator, $rewriteSentDate = true)
-    {
+    public function __construct(
+        UuidGenerator $uuidGenerator,
+        $rewriteSentDate = true,
+        $rewriteDealDate = true
+    ) {
         $this->uuidGenerator = $uuidGenerator;
         $this->rewriteSentDate = $rewriteSentDate;
+        $this->rewriteDealDate = $rewriteDealDate;
     }
 
     /**
@@ -109,8 +118,12 @@ class ArrayToReceiptDtoTransformer
             $dto->setUuid($this->uuidGenerator->generate());
         }
 
+        $currentDateTime = new \DateTime();
         if ($this->rewriteSentDate) {
-            $dto->setDatOdesl(new \DateTime());
+            $dto->setDatOdesl($currentDateTime);
+        }
+        if ($this->rewriteDealDate) {
+            $dto->setDatTrzby($currentDateTime);
         }
 
         return $dto;
