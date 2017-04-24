@@ -156,8 +156,8 @@ class CSVExportCommandTest extends TestCase
         $expectedColumnsCount = count($expectedColumns);
         $this->assertCount($expectedColumnsCount, $outputColumns);
         for ($i = 0; $i < $expectedColumnsCount; $i++) {
-            if (substr($expectedColumns[$i], 0, 1) === '[') {
-                $this->assertRegExp('#' . $expectedColumns[$i] . "#", $outputColumns[$i]);
+            if (substr($expectedColumns[$i], 0, 1) === '/') {
+                $this->assertRegExp($expectedColumns[$i], $outputColumns[$i]);
             } else {
                 $this->assertSame(
                     $expectedColumns[$i],
@@ -214,8 +214,8 @@ class CSVExportCommandTest extends TestCase
                 [
                     'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,porad_cis,dat_trzby,celk_trzba,' .
                         'rezim,zakl_dan1,dan1,zakl_dan2,dan2,zakl_dan3,dan3,uuid_zpravy,fik,pkp,bkp,chyba',
-                    '1,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,70,30,' .
-                        '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
+                    '1,/\d\d?\.\d\d?\.\d{4} \d\d?:\d{2}:\d{2}/,ano,ano,CZ24222224,101,3,5862,/\d\d?\.\d\d?\.\d{4}/,' .
+                        '100,0,83,17,80,60.5,70,30,/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/,' .
                         'b3309b52-7c87-4014-a496-4c7a53cf9125,03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' .
                         $bkp . ','
                 ],
@@ -233,11 +233,11 @@ class CSVExportCommandTest extends TestCase
                 [
                     'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,porad_cis,dat_trzby,celk_trzba,' .
                     'rezim,zakl_dan1,dan1,zakl_dan2,dan2,zakl_dan3,dan3,uuid_zpravy,fik,pkp,bkp,chyba',
-                    '1,"10.1.2017 9:11:01",ano,ano,,103,3,5862,9.1.2017,100,0,83,17,80,60.5,70,30,' .
-                        '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},,,,' .
+                    '1,/\d\d?\.\d\d?\.\d{4} \d\d?:\d{2}:\d{2}/,ano,ano,,103,3,5862,/\d\d?\.\d\d?\.\d{4}/,' .
+                        '100,0,83,17,80,60.5,70,30,/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/,,,,' .
                         '"Missing or invalid field: dic_popl"',
-                    '2,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,70,30,' .
-                        '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
+                    '2,/\d\d?\.\d\d?\.\d{4} \d\d?:\d{2}:\d{2}/,ano,ano,CZ24222224,101,3,5862,/\d\d?\.\d\d?\.\d{4}/,' .
+                        '100,0,83,17,80,60.5,70,30,/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/,' .
                         'b3309b52-7c87-4014-a496-4c7a53cf9125,03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' .
                         $bkp . ','
                 ],
@@ -255,11 +255,11 @@ class CSVExportCommandTest extends TestCase
                 [
                     'id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,porad_cis,dat_trzby,celk_trzba,' .
                         'rezim,zakl_dan1,dan1,zakl_dan2,dan2,zakl_dan3,dan3,uuid_zpravy,fik,pkp,bkp,chyba',
-                    '1,"10.1.2017 9:11:01",ano,ano,CZ24222224,103,3,5862,9.1.2017,100,0,83,17,80,60.5,70,30,' .
-                        '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
+                    '1,/\d\d?\.\d\d?\.\d{4} \d\d?:\d{2}:\d{2}/,ano,ano,CZ24222224,103,3,5862,/\d\d?\.\d\d?\.\d{4}/,' .
+                        '100,0,83,17,80,60.5,70,30,/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/,' .
                         ',03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' . $bkp . ',"Connection error"',
-                    '2,"10.1.2017 9:10:01",ano,ano,CZ24222224,101,3,5862,9.1.2017,100,0,83,17,80,60.5,70,30,' .
-                        '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' .
+                    '2,/\d\d?\.\d\d?\.\d{4} \d\d?:\d{2}:\d{2}/,ano,ano,CZ24222224,101,3,5862,/\d\d?\.\d\d?\.\d{4}/,' .
+                        '100,0,83,17,80,60.5,70,30,/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/,' .
                         'b3309b52-7c87-4014-a496-4c7a53cf9125,03ec1d0e-6d9f77fb-1d798ccb-f4739666-a4069bc3,' .
                         $bkp . ','
                 ],
