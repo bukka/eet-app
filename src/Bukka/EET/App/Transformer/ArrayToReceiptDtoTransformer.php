@@ -50,6 +50,8 @@ class ArrayToReceiptDtoTransformer
      * ArrayToReceiptDtoTransformer constructor
      *
      * @param UuidGenerator $uuidGenerator
+     * @param bool $rewriteSentDate
+     * @param bool $rewriteDealDate
      */
     public function __construct(
         UuidGenerator $uuidGenerator,
