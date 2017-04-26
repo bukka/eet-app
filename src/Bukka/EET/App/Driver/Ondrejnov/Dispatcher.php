@@ -4,9 +4,8 @@ namespace Bukka\EET\App\Driver\Ondrejnov;
 
 use Bukka\EET\App\Dto\ReceiptDto;
 use Bukka\EET\App\Dto\ResponseDto;
-use Ondrejnov\EET\Exceptions\ClientException;
-use Ondrejnov\EET\Exceptions\RequirementsException;
-use Ondrejnov\EET\Utils\Format;
+use Bukka\EET\App\Driver\Exception\ClientException;
+use Bukka\EET\App\Driver\Exception\RequirementsException;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 /**

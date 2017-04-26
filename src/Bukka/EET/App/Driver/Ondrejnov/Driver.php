@@ -6,7 +6,6 @@ use Bukka\EET\App\Driver\DriverInterface;
 use Bukka\EET\App\Driver\Exception\DriverException;
 use Bukka\EET\App\Dto\ReceiptDto;
 use Bukka\EET\App\Dto\ResponseDto;
-use Prophecy\Exception\Exception;
 
 class Driver implements DriverInterface
 {

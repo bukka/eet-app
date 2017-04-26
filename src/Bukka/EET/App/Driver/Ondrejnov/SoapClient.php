@@ -2,7 +2,7 @@
 
 namespace Bukka\EET\App\Driver\Ondrejnov;
 
-use Ondrejnov\EET\Exceptions\ClientException;
+use Bukka\EET\App\Driver\Exception\ClientException;
 use RobRichards\WsePhp\WSSESoap;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
