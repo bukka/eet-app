@@ -30,8 +30,8 @@ cp config/paramters.yml.dist config/parameters.yml
 Then we add test input file to `csv/in/test.csv`:
 
 ```csv
-id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,porad_cis,dat_trzby,celk_trzba,rezim,zakl_dan1,dan1,zakl_dan2,dan2
-1,"10.1.2017 9:10:01",ano,ne,CZ00000019,101,3,5862,"10.1.2017",100,0,83,17,,
+id,dat_odesl,prvni_zadani,overeni,dic_popl,id_provoz,id_pokl,porad_cis,dat_trzby,celk_trzba,rezim,zakl_dan1,dan1,zakl_dan2,dan2,zakl_dan3,dan3
+1,"10.5.2018 9:10:01",ano,"ano",CZ24222224,101,3,5862,"9.1.2017",100,0,83,17,80,60.5,70,30
 ```
 
 And finally we run the console command:
@@ -39,5 +39,5 @@ And finally we run the console command:
 ./console csv:export test.csv
 ```
 
-The resulted file with all info returned by service (FIK, BKP, PKP, error info if any...)
+The resulted file with all info returned by service (FIK, BKP, PKP, error info if there is any error)
 will be created in `csv/out/test.csv`.
