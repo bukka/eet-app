@@ -6,6 +6,7 @@ use Bukka\EET\App\CSV\CSVReader;
 use Bukka\EET\App\Driver\DriverInterface;
 use Bukka\EET\App\Dto\ResponseDto;
 use Bukka\EET\App\Storage\StorageInterface;
+use Bukka\EET\App\Storage\StorageResult;
 use Bukka\EET\App\Transformer\ArrayToReceiptDtoTransformer;
 use Bukka\EET\App\Validator\Exception\ValidatorException;
 use Bukka\EET\App\Validator\ReceiptValidatorInterface;

@@ -120,6 +120,7 @@ class CSVExportCommandTest extends TestCase
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     private function executeCommand()
     {
@@ -175,6 +176,7 @@ class CSVExportCommandTest extends TestCase
      * @param array $fiks
      * @param string $pkp
      * @param string $bkp
+     * @throws \Exception
      */
     public function testItShouldExportCSVFile($rows, $expectedRows, $fiks, $pkp, $bkp)
     {
